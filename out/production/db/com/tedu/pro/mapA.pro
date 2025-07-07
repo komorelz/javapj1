@@ -1,5 +1,6 @@
-bg1=img/bg/1.png
+bg3=img/bg/3.png
 bg2=img/bg/2.png
+bg4=img/bg/4.png
 playerA=img/play/y.png
 playerABomb=img/play/bombPlayer/1.png
 playerC=img/play/z.png

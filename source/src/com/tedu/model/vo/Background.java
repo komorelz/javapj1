@@ -1,6 +1,7 @@
 package com.tedu.model.vo;
 
 import com.tedu.manager.ElementFactory;
+import com.tedu.show.StartFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,22 +9,20 @@ import java.awt.*;
 public class Background extends SuperElement {
 	private ImageIcon icon;
 	private int index;
+
 	@Override
 	public void showElement(Graphics g) {
-		// TODO 自动生成的方法存根
 		g.drawImage(icon.getImage(), 0, 0, 480, 480, null);
 	}
 
 	@Override
 	public void move() {
-		// TODO 自动生成的方法存根
-
+		// No movement for background
 	}
 
 	@Override
 	public void destroy() {
-		// TODO 自动生成的方法存根
-
+		// No destruction logic needed
 	}
 
 	public Background() {
@@ -35,9 +34,15 @@ public class Background extends SuperElement {
 		this.icon = icon;
 		this.index = index;
 	}
-	public static Background createBackground(int index) {
-		ImageIcon icon = ElementFactory.ElementLoad.getInstance().getImageMap().get("bg"+index);
-		return new Background(0, 0, 480, 480, icon,index);
+
+	public static Background createBackground() {
+		// Use globalVariable from StartFrame to determine the background index
+		int bgIndex = StartFrame.globalVariable == 1 ? 3 : 4; // Map A uses bg3, Map B uses bg4
+		ImageIcon icon = ElementFactory.ElementLoad.getInstance().getImageMap().get("bg" + bgIndex);
+		if (icon == null) {
+			System.err.println("Failed to load background image: bg" + bgIndex);
+		}
+		return new Background(0, 0, 480, 480, icon, bgIndex);
 	}
 
 	public ImageIcon getIcon() {
@@ -48,18 +53,8 @@ public class Background extends SuperElement {
 		this.icon = icon;
 	}
 
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
 	@Override
 	public boolean allowpass() {
-		// TODO 自动生成的方法存根
 		return true;
 	}
-	
 }

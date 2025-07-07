@@ -1,7 +1,4 @@
 package com.tedu.model.vo;
-
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -18,20 +15,6 @@ public class Audio {
 
 
 
-	public static List<AudioClip> getAudios(){
-		List<AudioClip> audios = new ArrayList<>();
-		try {
-			audios.add(Applet.newAudioClip( ( ( new File(Audio.BGM) ).toURI() ).toURL() ) );
-			audios.add(Applet.newAudioClip( ( ( new File(Audio.ADD) ).toURI() ).toURL() ) );
-			audios.add(Applet.newAudioClip( ( ( new File(Audio.BOOM) ).toURI() ).toURL() ) );
-			audios.add(Applet.newAudioClip( ( ( new File(Audio.OVER) ).toURI() ).toURL() ) );
 
-			
-		} catch (MalformedURLException e) {
-			
-			e.printStackTrace();
-		}
-		return audios;
-	}
 
 }

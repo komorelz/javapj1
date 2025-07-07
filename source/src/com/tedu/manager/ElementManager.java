@@ -95,15 +95,6 @@ public class ElementManager {
 		return superElement;
 	}
 
-	// 更新
-	public void updateElementByPx(int preRow, int currentRow, int preCol, int currentCol) {
-		setElementByPx(currentRow, currentCol, removeElementByPx(preRow, preCol));
-	}
-
-	public void updateElementByIndex(int preRow, int currentRow, int preCol, int currentCol) {
-		setElementByIndex(currentRow, currentCol, removeElementByIndex(preRow, preCol));
-	}
-
 	// 资源加载
 	public void load() {
 		ElementFactory.ElementLoad elementLoad = ElementFactory.ElementLoad.getInstance();
@@ -111,7 +102,7 @@ public class ElementManager {
 		elementLoad.readPlayerPro();
 		elementLoad.readGamePro();
 		elementLoad.readBoxPro();
-		Background background = Background.createBackground(2);
+		Background background = Background.createBackground(); // 修改为无参数调用
 		map.get("background").add(background);
 		Player player = (Player) ElementFactory.elementFactory("onePlayer");
 		map.get("play").add(player);
@@ -145,80 +136,11 @@ public class ElementManager {
 		Player player1 = (Player) players.get(0);
 		Player player2 = (Player) players.get(1);
 
-		// 更新 player1 的反向时间（移到 PlayerMovement.update()，此处移除）
-        /*
-        int reverseTime = player1.getMovement().getReverseTime();
-        int startReverseTime = player1.getMovement().getStartReverseTime();
-        int perTime = Player.perReverseTime;
-        if (reverseTime >= perTime) {
-            if (time >= (startReverseTime + perTime)) {
-                int a = (time - startReverseTime) / perTime;
-                player1.getMovement().setReverseTime(reverseTime - a * perTime);
-                player1.getMovement().setStartReverseTime(startReverseTime + a * perTime);
-            }
-        }
-        */
-
-		// 更新 player2 的反向时间（移到 PlayerMovement.update()，此处移除）
-        /*
-        reverseTime = player2.getMovement().getReverseTime();
-        startReverseTime = player2.getMovement().getStartReverseTime();
-        if (reverseTime >= perTime) {
-            if (time >= (startReverseTime + perTime)) {
-                int a = (time - startReverseTime) / perTime;
-                player2.getMovement().setReverseTime(reverseTime - a * perTime);
-                player2.getMovement().setStartReverseTime(startReverseTime + a * perTime);
-            }
-        }
-        */
-
 		if (time % 10 == 0) {
 			System.out.println(player1);
 			System.out.println();
 			System.out.println(player2);
 		}
-	}
-
-	public boolean isAllowPassByPx(int row, int col) {
-		SuperElement superElement = getElementByPx(row, col);
-		if (superElement == null)
-			return true;
-		int type = superElement.getObjectType();
-		System.out.println(type);
-		return type <= 2;
-	}
-
-	public boolean isAllowPassByIndex(int row, int col) {
-		SuperElement superElement = getElementByIndex(row, col);
-		if (superElement == null)
-			return true;
-		int type = superElement.getObjectType();
-		System.out.println(type);
-		return type <= 2;
-	}
-
-	public void cout() {
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 12; j++) {
-				SuperElement superElement = getElementByIndex(i, j);
-				if (superElement != null) {
-					System.out.print(superElement.getObjectType() + " ");
-				} else {
-					System.out.print(0 + " ");
-				}
-			}
-			System.out.println();
-		}
-		System.out.println();
-		System.out.println();
-	}
-
-	public SuperElement[][] getObjects() {
-		return objects;
-	}
-
-	public void setObjects(SuperElement[][] objects) {
-		this.objects = objects;
 	}
 
 	public boolean isBomb(int row, int col) {

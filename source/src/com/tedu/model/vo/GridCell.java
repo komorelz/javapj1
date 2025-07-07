@@ -1,4 +1,7 @@
 package com.tedu.model.vo;
+
+import java.awt.Rectangle;
+
 public class GridCell {
 	// 0 没有 1人 2道具 3爆炸箱子 4不可爆炸箱子  5泡泡
 	public static int[][] grid = new int[12][12];
@@ -10,6 +13,8 @@ public class GridCell {
 			}
 		}
 	}
+	
+	
 	public static int getTypeByIndex(int row,int col) {
 		return grid[row][col];
 	}
@@ -30,6 +35,7 @@ public class GridCell {
 	public static void setGridByIndex(int row,int col,int type) {
 		grid[row][col] = type;
 	}
+	
 	public static void cout() {
 		int i,j;
 		for (i = 0; i < 12; i++) {
